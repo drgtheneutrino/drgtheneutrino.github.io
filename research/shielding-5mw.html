@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shielding verification for the UMLRR 5 MW upgrade | Daniel Gill</title>
+<meta name="description" content="A Python shielding calculator verifying combined neutron and photon dose profiles for the UMass Lowell Research Reactor's proposed 1 MW to 5 MW power upgrade.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2305080f'/%3E%3Ccircle cx='32' cy='32' r='12' fill='%2345d8ff'/%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%2345d8ff' stroke-opacity='0.35' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><span class="dot"></span>Daniel Gill</a>
+    <div class="nav-links">
+      <a href="../index.html#research" class="active">Research</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#gallery">Gallery</a>
+      <a href="../resume.html">Resume</a>
+    </div>
+  </div>
+</nav>
+
+<main class="article">
+  <a class="backlink" href="../index.html#research">&larr; All research</a>
+
+  <div class="titleblock">
+    <p class="eyebrow warm">B.S. capstone &middot; spring 2026</p>
+    <h1>Shielding verification for the UMLRR 5 MW upgrade</h1>
+    <p class="meta">
+      <span>Advisors: Ksenofon Konomi, Dr. Mark Tries</span>
+      <span>Python &middot; NumPy &middot; SciPy</span>
+      <span>Berger buildup &middot; Wyckoff-Chilton DCFs</span>
+    </p>
+  </div>
+
+  <h2>The problem</h2>
+  <p>UMass Lowell is planning to upgrade the UMLRR from 1 MW to 5 MW. Five times the power means roughly five times the fluence at every facility boundary, and the existing shielding needs to be re-evaluated against the regulatory dose target of 2 mrem/h. The two facilities that matter most are the 6-inch beam port, which delivers a hard neutron spectrum with a prominent 7.65 MeV iron capture gamma line, and the thermal column, which delivers a much softer graphite-moderated spectrum at higher total fluence.</p>
+
+  <figure class="bright">
+    <img src="../assets/img/beamport-plan.png" alt="Plan view drawing of the beam port facility showing the six-inch beam port channel entering at 60 degrees, borated polymer shielding layers, the permanent beam stop, concrete shield wall, and access control door">
+    <figcaption>Beam port facility, plan view. The channel meets the shield wall at 60 degrees, which earns its own geometric correction in the solver.</figcaption>
+  </figure>
+
+  <h2>The method</h2>
+  <p>I wrote a Python calculator that takes MCNP-generated fluence spectra for each facility and computes the combined deep dose equivalent rate behind any thickness of ordinary concrete. Photons go through an energy-binned exposure calculation with Berger buildup factors, since a bare exponential underestimates transmitted dose by roughly an order of magnitude at these depths. Neutrons go through 23-group dose conversion factors originally computed by Wyckoff and Chilton, interpolated in the log domain to keep the values physical across five decades. Brent's method then solves for the exact thickness where the combined dose rate crosses the target.</p>
+  <p>Fluence scales linearly with power to first order, so the same tool answers the question at 1 MW, 5 MW, or anywhere in between with one parameter.</p>
+
+  <h2>The results</h2>
+  <div class="numbers">
+    <div class="n"><b>196.43 cm</b><span>beam port requirement at 5 MW (170 cm effective at 60&deg;)</span></div>
+    <div class="n"><b>195.03 cm</b><span>thermal column requirement at 5 MW</span></div>
+    <div class="n"><b>+26 to 29 cm</b><span>added concrete for 5&times; the power, about 2.3 half-value layers</span></div>
+  </div>
+  <p>The fivefold power increase costs surprisingly little extra concrete because attenuation is exponential. More interesting is what dominates at depth: neutrons attenuate faster through concrete than high-energy photons, so both facilities end up photon-limited at the solution thickness, 70% of the residual dose at the beam port and 88% at the thermal column. The two requirements also converge to within 1.4 cm of each other at 5 MW for exactly that reason.</p>
+  <p>These are conservative ordinary-concrete equivalents. The installed shielding uses borated polyethylene at the beam port and barium carbonate concrete bricks at the thermal column, both better per centimeter than the model assumes, so the material-specific comparison is the natural follow-on study.</p>
+
+  <figure class="bright">
+    <img src="../assets/img/thermal-column.png" alt="Isometric CAD view of the thermal column assembly showing the thermal column extension, case, lead gamma shield, aluminum-encased graphite, and natural convection coolant flow path">
+    <figcaption>Thermal column assembly. Lead handles the core gammas, graphite moderates the neutrons, and the exit beam is nearly all thermal.</figcaption>
+  </figure>
+
+  <h2>The errata hunt</h2>
+  <p>While validating the neutron dose conversion factors, I compared the tabulated values in a standard shielding reference against the original 1973 Wyckoff and Chilton data and found four typographical errors. One sits in the energy range this analysis uses: the 15 to 25 MeV group at 500 g/cm&sup2; of concrete is listed at 1.4&times;10<sup>-16</sup> Sv&middot;cm&sup2; and should be 1.4&times;10<sup>-15</sup>, a factor of ten. All calculations here use the corrected values. Check your tables against their sources.</p>
+
+  <div class="btn-row">
+    <a class="btn" href="../assets/docs/umlrr-5mw-shielding-capstone.pdf">Download the report (PDF)</a>
+    <a class="btn ghost" href="transistor-dosimetry.html">Next: the thesis work &rarr;</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">&copy; 2026 Daniel Gill &middot; <a href="mailto:dan@dangillphysics.com">dan@dangillphysics.com</a></div>
+</footer>
+
+</body>
+</html>

@@ -1,1 +1,191 @@
-<h1>Dan Gill</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daniel Gill | Computational Health Physics</title>
+<meta name="description" content="Daniel Gill is an NRC-licensed reactor operator at the UMass Lowell Research Reactor and an M.S. candidate building Monte Carlo models, dosimetry systems, and instrumentation software.">
+<link rel="canonical" href="https://dangillphysics.com/">
+<meta property="og:title" content="Daniel Gill | Computational Health Physics">
+<meta property="og:description" content="Reactor operations, radiation transport modeling, and neutron dosimetry.">
+<meta property="og:image" content="https://dangillphysics.com/assets/img/headshot.jpg">
+<meta property="og:url" content="https://dangillphysics.com/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2305080f'/%3E%3Ccircle cx='32' cy='32' r='12' fill='%2345d8ff'/%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%2345d8ff' stroke-opacity='0.35' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="dot"></span>Daniel Gill</a>
+    <div class="nav-links">
+      <a href="#research">Research</a>
+      <a href="#projects">Projects</a>
+      <a href="#gallery">Gallery</a>
+      <a href="resume.html">Resume</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow rise">NRC-licensed reactor operator &middot; UMass Lowell Research Reactor</p>
+      <h1 class="rise d1">Operating the reactor.<br>Modeling the physics.</h1>
+      <p class="lede rise d2">I'm Dan Gill, a reactor operator at the 1 MW UMass Lowell Research Reactor and an M.S. candidate in Radiological Sciences and Protection. I build the <strong>Monte Carlo models, instrumentation software, and dosimetry systems</strong> that connect what a reactor does to what the numbers say.</p>
+      <div class="btn-row rise d3">
+        <a class="btn" href="resume.html">View resume</a>
+        <a class="btn ghost" href="#research">Read the research</a>
+      </div>
+      <p class="toolline rise d3">MCNP6.3<span>/</span>OpenMC<span>/</span>Python<span>/</span>Slurm + OpenMPI<span>/</span>ASTM E1855<span>/</span>GPIB instrumentation</p>
+    </div>
+    <div class="portrait-frame rise d2">
+      <img class="portrait" src="assets/img/headshot.jpg" alt="Portrait of Daniel Gill" width="330" height="330">
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <p class="eyebrow">About</p>
+    <div class="about-grid">
+      <div>
+        <h2>Measurement and simulation, same job</h2>
+        <p>I finished my B.S. in Physics at UMass Lowell in May 2026 and stayed for the M.S. in Radiological Sciences and Protection, expected May 2027. Since April 2024 I've worked in the UMLRR control room, first as an auxiliary operator and now as an NRC-licensed reactor operator, running the reactor for experiments and client irradiations.</p>
+        <p>The through line in my work is refusing to treat experiment and computation as separate departments. If I irradiate transistors, I also write the GPIB instrumentation code and the fluence calculator that reduces the data. If I model shielding, I first check the published coefficient tables against their original sources. The end goal is a career in computational health physics, and everything on this site points that way.</p>
+        <div class="chip-logo"><img src="assets/img/uml-logo.png" alt="University of Massachusetts Lowell"></div>
+      </div>
+      <dl class="facts">
+        <div><dt>Based in</dt><dd>Windham, New Hampshire</dd></div>
+        <div><dt>License</dt><dd>NRC Reactor Operator, UMass Lowell Research Reactor</dd></div>
+        <div><dt>Certification</dt><dd>Nuclear Criticality Safety, Levels I &amp; II</dd></div>
+        <div><dt>Education</dt><dd>M.S. Radiological Sciences &amp; Protection (exp. 2027), B.S. Physics (2026)</dd></div>
+        <div><dt>Affiliations</dt><dd>American Nuclear Society, past president of the UML Society of Physics Students</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section id="research">
+  <div class="wrap">
+    <p class="eyebrow">Research</p>
+    <h2>Two problems I keep coming back to</h2>
+
+    <article class="feature">
+      <div>
+        <p class="eyebrow">M.S. thesis &middot; in progress</p>
+        <h3>Transistor neutron dosimetry</h3>
+        <p>The UMLRR measures fast-neutron fluence with 2N2222A transistors: irradiate, anneal, measure the gain drop, apply the Messenger-Spratt equation per ASTM E1855. I built the full chain, from Keithley source-measure instrumentation over GPIB to a fluence calculator with complete uncertainty propagation, and characterized devices from 1&times;10<sup>10</sup> to 6&times;10<sup>14</sup> n/cm&sup2;.</p>
+        <p>Then the system found something. Nine matched-history devices given an identical 12,400 rad Co-60 dose split into two clean populations after the standard anneal, separated by a factor of 19 in residual damage. Figuring out why, and what it means for low-fluence dosimetry, is now the heart of the thesis.</p>
+        <div class="links">
+          <a class="mono" href="research/transistor-dosimetry.html">Read the full story &rarr;</a>
+          <a class="mono" href="assets/docs/bimodal-recovery-2n2222.pdf">Report PDF &darr;</a>
+        </div>
+      </div>
+      <figure class="media plain">
+        <img src="assets/img/bimodal-fluence.svg" alt="Bar chart of apparent neutron-equivalent fluence for nine transistors after a pure gamma exposure, split into a good-recovery cluster and a poor-recovery cluster">
+      </figure>
+    </article>
+
+    <article class="feature rev">
+      <div>
+        <p class="eyebrow warm">B.S. capstone &middot; spring 2026</p>
+        <h3>Shielding verification for the UMLRR 5&nbsp;MW upgrade</h3>
+        <p>UMass Lowell plans to take the reactor from 1 MW to 5 MW. My capstone built a Python tool that turns MCNP fluence spectra into combined neutron and photon dose profiles through concrete, using Berger buildup factors, Wyckoff-Chilton dose conversion factors, and Brent's method to solve for the required shield thickness.</p>
+        <p>At 5 MW the beam port needs 196 cm of ordinary-concrete-equivalent shielding and the thermal column 195 cm to hold the boundary at 2 mrem/h. Along the way I found four typographical errors in a standard reference's dose conversion table by checking it against the 1973 original.</p>
+        <div class="links">
+          <a class="mono" href="research/shielding-5mw.html">Read the full story &rarr;</a>
+          <a class="mono" href="assets/docs/umlrr-5mw-shielding-capstone.pdf">Report PDF &darr;</a>
+        </div>
+      </div>
+      <figure class="media">
+        <img src="assets/img/thermal-column.png" alt="Isometric CAD view of the UMLRR thermal column assembly showing the extension, case, lead gamma shield, and aluminum-encased graphite">
+      </figure>
+    </article>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <p class="eyebrow">Projects</p>
+    <h2>Tools I built because I needed them</h2>
+    <div class="cards">
+
+      <div class="card">
+        <h3>MCNP23DAN</h3>
+        <p>Converts MCNP input decks into watertight 3D meshes (GLB, STL, OBJ, PLY) so anyone can view a reactor model without MCNP, CAD software, or a license. A purpose-built CSG parser handles surfaces, macrobodies, transforms, universes, and lattices, and a bundled offline three.js viewer opens results in one click. Volume validation on the Godiva sphere converges to within 0.01% of the analytic value.</p>
+        <p class="tags">python &middot; marching cubes &middot; three.js &middot; pyinstaller</p>
+        <a class="more" href="https://github.com/drgtheneutrino/MCNP23DAN">View on GitHub &rarr;</a>
+      </div>
+
+      <div class="card">
+        <h3>Kerma</h3>
+        <p>A programming language for physics and math, built from the lexer up. Python-like syntax compiles to a custom 39-opcode bytecode VM, every value can carry units through arithmetic (371 units stored as dimension vectors), matrices and symbolic expressions are first class, and output renders Mathcad style in a browser notebook. 570 passing tests and no dependencies beyond numpy.</p>
+        <p class="tags">language design &middot; bytecode vm &middot; unit-aware types</p>
+        <a class="more" href="https://github.com/drgtheneutrino/Kerma-V3">View on GitHub &rarr;</a>
+      </div>
+
+      <div class="card">
+        <h3>Fast neutron filter</h3>
+        <p>An MCNP6.3 design study for a graphite thermal column with an upstream bismuth gamma filter at the UMLRR 6-inch beam port, targeting a thermal-to-fast ratio of at least 100:1. A Python pipeline generates parameterized input decks, batches runs across a 3-node Slurm/OpenMPI cluster, parses MCTAL tallies, and folds the resulting spectra against the ASTM E722 silicon damage function.</p>
+        <p class="tags">mcnp6.3 &middot; slurm &middot; astm e722 &middot; sdef synthesis</p>
+        <a class="more" href="research/transistor-dosimetry.html">Feeds the thesis work &rarr;</a>
+      </div>
+
+      <div class="card">
+        <h3>Everything else</h3>
+        <p>Eighteen public repositories and counting, including a radiation dose FastAPI service, an AlphaZero-style Carcassonne bot, and a webcam-driven mouse controller. Plus the 3-node Dell Precision Slurm cluster in my basement that runs the MCNP jobs.</p>
+        <p class="tags">github.com/drgtheneutrino</p>
+        <a class="more" href="https://github.com/drgtheneutrino">Browse the profile &rarr;</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <p class="eyebrow">Gallery</p>
+    <h2>Figures and photos</h2>
+    <div class="gallery">
+      <figure class="bright">
+        <img src="assets/img/beamport-plan.png" alt="Plan view drawing of the beam port facility showing the six-inch beam port channel, borated polymer shielding, concrete shield wall, and access control door">
+        <figcaption>Beam port facility, plan view. From the 5 MW shielding capstone.</figcaption>
+      </figure>
+      <figure class="bright">
+        <img src="assets/img/thermal-column.png" alt="Isometric view of the thermal column assembly">
+        <figcaption>Thermal column assembly, isometric. Lead gamma shield and aluminum-encased graphite.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/img/bimodal-fluence.svg" alt="Chart of apparent fluence per transistor after pure gamma exposure">
+        <figcaption>Nine identical exposures, two populations. The bimodal recovery result.</figcaption>
+      </figure>
+      <!-- Add more photos by copying a <figure> block above.
+           Drop the image in assets/img/ and update src, alt, and the caption.
+           Use class="bright" on <figure> for light-background images like drawings. -->
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <p class="eyebrow" style="justify-content:center;">Contact</p>
+    <h2>Get in touch</h2>
+    <a class="bigmail" href="mailto:dan@dangillphysics.com">dan@dangillphysics.com</a>
+    <div class="out mono">
+      <a href="https://github.com/drgtheneutrino">GitHub</a>
+      <a href="https://www.linkedin.com/in/daniel-gillnh">LinkedIn</a>
+      <a href="assets/docs/Daniel_Gill_Resume.pdf">Resume PDF</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">&copy; 2026 Daniel Gill &middot; Written by hand, hosted on GitHub Pages</div>
+</footer>
+
+</body>
+</html>
