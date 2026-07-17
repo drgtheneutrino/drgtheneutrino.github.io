@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transistor neutron dosimetry | Daniel Gill</title>
+<meta name="description" content="Building a transistor-based fast-neutron dosimetry system at the UMass Lowell Research Reactor, and the bimodal recovery anomaly it uncovered.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f7f8f3'/%3E%3Ccircle cx='32' cy='32' r='12' fill='%231e7a52'/%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%232456a6' stroke-opacity='0.4' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700&family=Albert+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><span class="dot"></span>Daniel Gill</a>
+    <div class="nav-links">
+      <a href="../index.html#research" class="active">Research</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#gallery">Gallery</a>
+      <a href="../resume.html">Resume</a>
+    </div>
+  </div>
+</nav>
+
+<main class="article">
+  <a class="backlink" href="../index.html#research">&larr; All research</a>
+
+  <div class="titleblock">
+    <p class="eyebrow">M.S. thesis &middot; in progress</p>
+    <h1>Transistor neutron dosimetry</h1>
+    <p class="meta">
+      <span>UMass Lowell Research Reactor</span>
+      <span>ASTM E1855-15</span>
+      <span>Python &middot; Keithley 2400/220 &middot; GPIB</span>
+    </p>
+  </div>
+
+  <h2>The measurement</h2>
+  <p>Silicon bipolar transistors make good fast-neutron dosimeters. Displacement damage in the base region degrades the current gain, and the change in reciprocal gain maps to a 1 MeV(Si)-equivalent fluence through the Messenger-Spratt equation. The UMLRR runs this method per ASTM E1855-15 in its Fast Neutron Irradiator: irradiate 2N2222A devices, anneal for 2 hours at 80 &deg;C to strip the unstable defect component, remeasure the gain, and compute fluence.</p>
+  <p>The program is reproducible to about &plusmn;8% between 1&times;10<sup>13</sup> and 3&times;10<sup>14</sup> n/cm&sup2;. Below 1&times;10<sup>12</sup> n/cm&sup2; it falls apart, with individual devices reading anywhere from 50% under to 300% over the expected fluence. Explaining that scatter is what the thesis set out to do.</p>
+
+  <h2>The system I built</h2>
+  <p>Before the physics questions could be asked cleanly, the measurement chain had to be automated. I wrote Python instrumentation software that drives a Keithley source-measure setup over GPIB with iterative base-current convergence, handles pre-irradiation screening, and takes post-irradiation gain measurements under an identical protocol every time. A standalone fluence calculator implements Messenger-Spratt with full uncertainty propagation. The system has characterized TO-18 metal-can and 2N2222AUB surface-mount packages across 1&times;10<sup>10</sup> to 6&times;10<sup>14</sup> n/cm&sup2;.</p>
+
+  <h2>The bimodal result</h2>
+  <p>In-pile irradiations deliver gamma dose alongside the neutrons, so the first control experiment isolated the gamma channel entirely. Nine devices with matched irradiation histories received 12,400 rad of pure Co-60 gamma, the dose that MCNP calibration maps to a 1&times;10<sup>14</sup> n/cm&sup2; reactor run, delivered in a geometry uniform to better than 2%. All nine then went through the standard 2-hour 80 &deg;C anneal.</p>
+  <p>They did not scatter around a mean. They split.</p>
+
+  <figure>
+    <img src="../assets/img/bimodal-fluence.svg" alt="Bar chart showing apparent neutron-equivalent fluence for nine transistors after identical gamma exposure, with four devices clustered near 2E12 and five devices between 8.6E12 and 6.4E13">
+    <figcaption>Apparent neutron-equivalent fluence per device after an identical 12,400 rad gamma dose. Four devices recovered nearly completely, five did not, and nothing landed in between. Data from Table 1 of the report below.</figcaption>
+  </figure>
+
+  <div class="numbers">
+    <div class="n"><b>19&times;</b><span>separation between cluster means in residual damage</span></div>
+    <div class="n"><b>p = 0.017</b><span>Welch's t-test, confirmed by Mann-Whitney and Levene</span></div>
+    <div class="n"><b>r &asymp; 0</b><span>pre-irradiation gain does not predict cluster membership</span></div>
+  </div>
+
+  <p>Four devices recovered to a mean residual &Delta;(1/h<sub>FE</sub>) of 0.0026 and five stalled at 0.0488, with an empty gap between the populations. Dose non-uniformity cannot produce a 19&times; split across a few inches of uniform field, and instrumentation drift cannot produce a discrete gap in a single measurement session, so both were ruled out. The leading hypothesis is residual oxide trap inventory from each device's prior irradiation history surviving the 180 &deg;C reset protocol, which the next experiment tests with verified-fresh devices.</p>
+
+  <h2>Why it matters</h2>
+  <p>Averaged over all nine devices, the gamma residual that survives the standard anneal looks like 23% of a full 1&times;10<sup>14</sup> n/cm&sup2; neutron signal, far above the few percent the program historically assumed. At high fluence the offset hides inside the calibration constant. At low fluence a poor-cluster device's gamma residual can rival or exceed the true neutron signal, and a batch drawn from a mixed population produces exactly the half-accurate, half-wildly-high pattern seen in the field data. The fix runs through device screening, anneal kinetics, or both, and that is where the thesis goes next.</p>
+
+  <div class="btn-row">
+    <a class="btn" href="../assets/docs/bimodal-recovery-2n2222.pdf">Download the report (PDF)</a>
+    <a class="btn ghost" href="shielding-5mw.html">Next: the 5 MW capstone &rarr;</a>
+  </div>
+  <p class="mono" style="color: var(--muted); margin-top: 18px;">The PDF covers the Co-60 baseline arm of the thesis. Full thesis expected 2027.</p>
+</main>
+
+<footer>
+  <div class="wrap">&copy; 2026 Daniel Gill &middot; <a href="mailto:dan@dangillphysics.com">dan@dangillphysics.com</a></div>
+</footer>
+
+</body>
+</html>
